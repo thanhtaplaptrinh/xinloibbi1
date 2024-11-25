@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xin lỗi bé yêu</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(120deg, #f6d365, #fda085);
+        animation: backgroundChange 5s infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        color: #333;
+        overflow: hidden;
+      }
+      @keyframes backgroundChange {
+        0% {
+          background: linear-gradient(120deg, #f6d365, #fda085);
+        }
+        50% {
+          background: linear-gradient(120deg, #ff9a9e, #fecfef);
+        }
+        100% {
+          background: linear-gradient(120deg, #f6d365, #fda085);
+        }
+      }
+      .card {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        padding: 20px 30px;
+        text-align: center;
+        max-width: 400px;
+        position: relative;
+      }
+      .heart {
+        color: red;
+        font-size: 100px;
+        animation: beat 1s infinite;
+      }
+      @keyframes beat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.2);
+        }
+      }
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+      }
+      h1.shake {
+        animation: shake 0.5s ease-in-out;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        50% {
+          transform: translateX(5px);
+        }
+        75% {
+          transform: translateX(-5px);
+        }
+      }
+      p {
+        font-size: 1.2rem;
+        line-height: 1.5;
+        margin: 10px 0;
+      }
+      button {
+        background: #fda085;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+      }
+      button:hover {
+        background: #f6d365;
+        transform: scale(1.1);
+      }
+      .bubble-container {
+        position: absolute;
+        bottom: 10%;
+        left: 0;
+        width: 100%;
+        height: 80%;
+        pointer-events: none;
+      }
+      .bubble {
+        position: absolute;
+        bottom: 0;
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.7);
+        border-radius: 50%;
+        animation: floatUp 4s linear infinite;
+      }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) scale(0.5);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) scale(1);
+          opacity: 0;
+        }
+      }
+      .message {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 1rem;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 10px;
+        border-radius: 10px;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474082upl/anh-meme-meo-tang-hoa_103500619.jpg"
+      width="50%"
+    />
+    <div class="card">
+      <div class="heart">❤️</div>
+      <h1>Bé con ơi anh xin lỗi em nhiều lắm</h1>
+      <p>
+        Anh biết mình sai rồi, đừng giận anh nữa nhé.... lần sau anh hong làm bé
+        buồn nữa âuu..bé ơii hãy vui lên được hongg, anh hong như vậy nữa đâu
+        hiccc
+      </p>
+      <button onclick="triggerFun()">Tha thứ cho anh nhé🥺</button>
+      <div class="message" id="randomMessage"></div>
+    </div>
+    <div class="bubble-container" id="bubbleContainer"></div>
+    <script>
+      const messages = [
+        "Anh yêu em nhiều lắm! 🥰",
+        "Em là cả thế giới của anh! 🌏",
+        "Đừng buồn nữa bé yêu nhé! 😘",
+        "Làm hòa với anh nha bé ơi! 💕",
+        "Anh hứa sẽ ngoan hơn mà! 😔",
+      ];
+
+      function triggerFun() {
+        showMessage();
+        createBubbles();
+        shakeTitle();
+      }
+
+      function showMessage() {
+        const randomMessage =
+          messages[Math.floor(Math.random() * messages.length)];
+        const messageDiv = document.getElementById("randomMessage");
+        messageDiv.innerText = randomMessage;
+        messageDiv.style.display = "block";
+        setTimeout(() => (messageDiv.style.display = "none"), 3000);
+      }
+
+      function createBubbles() {
+        const container = document.getElementById("bubbleContainer");
+        for (let i = 0; i < 10; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("bubble");
+          bubble.style.left = Math.random() * 100 + "vw";
+          bubble.style.animationDuration = Math.random() * 2 + 2 + "s";
+          container.appendChild(bubble);
+          setTimeout(() => bubble.remove(), 4000);
+        }
+      }
+
+      function shakeTitle() {
+        const title = document.querySelector("h1");
+        title.classList.add("shake");
+        setTimeout(() => title.classList.remove("shake"), 500);
+      }
+    </script>
+  </body>
+</html>
